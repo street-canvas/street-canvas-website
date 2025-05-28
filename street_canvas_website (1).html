@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLAZE - Custom Fashion & Attire Morocco</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        body.rtl {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-color) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            width: 28px;
+            height: 28px;
+            background: white;
+            position: absolute;
+            clip-path: polygon(
+                50% 0%, 
+                60% 35%, 
+                100% 35%, 
+                70% 57%, 
+                82% 100%, 
+                50% 75%, 
+                18% 100%, 
+                30% 57%, 
+                0% 35%, 
+                40% 35%
+            );
+        }
+
+        .logo-icon::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            position: absolute;
+            clip-path: polygon(
+                50% 0%, 
+                60% 35%, 
+                100% 35%, 
+                70% 57%, 
+                82% 100%, 
+                50% 75%, 
+                18% 100%, 
+                30% 57%, 
+                0% 35%, 
+                40% 35%
+            );
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+            justify-content: center;
+        }
+
+        .logo-main {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-sub {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .language-switch {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .language-switch:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        /* Fashion-focused styling */
+        .section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--bg-light), #f0f9ff);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 2rem;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .product-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem !important;
+        }
+
+        .add-to-cart {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary-color);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            text-align: center;
+            font-size: 8rem;
+            color: var(--primary-color);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+        }
+
+        .contact-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Cart */
+        .cart {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            min-width: 200px;
+        }
+
+        .cart h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .cart-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .cart-total {
+            font-weight: 600;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        /* Hero Logo */
+        .hero-logo {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-color) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .hero-logo::before {
+            content: '';
+            width: 56px;
+            height: 56px;
+            background: white;
+            position: absolute;
+            clip-path: polygon(
+                50% 0%, 
+                60% 35%, 
+                100% 35%, 
+                70% 57%, 
+                82% 100%, 
+                50% 75%, 
+                18% 100%, 
+                30% 57%, 
+                0% 35%, 
+                40% 35%
+            );
+        }
+
+        .hero-logo::after {
+            content: '';
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            position: absolute;
+            clip-path: polygon(
+                50% 0%, 
+                60% 35%, 
+                100% 35%, 
+                70% 57%, 
+                82% 100%, 
+                50% 75%, 
+                18% 100%, 
+                30% 57%, 
+                0% 35%, 
+                40% 35%
+            );
+        }
+        .rtl .nav-links {
+            flex-direction: row-reverse;
+        }
+
+        .rtl .about-content {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .rtl .cart {
+            right: auto;
+            left: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image {
+                font-size: 4rem;
+            }
+
+            .cart {
+                position: relative;
+                margin: 2rem auto;
+                max-width: 300px;
+            }
+        }
+
+        /* Hidden class for language switching */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <div class="logo-icon"></div>
+                <div class="logo-text">
+                    <div class="logo-main">BLAZE</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link" data-en="About" data-ar="حولنا">About</a></li>
+                <li><a href="#products" class="nav-link" data-en="Products" data-ar="المنتجات">Products</a></li>
+                <li><a href="#contact" class="nav-link" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+                <li><button class="language-switch" onclick="toggleLanguage()">العربية</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-logo"></div>
+            <h1 data-en="BLAZE" data-ar="بليز">BLAZE</h1>
+            <p class="subtitle" data-en="Ignite Your Street Style - Morocco Delivery" data-ar="أشعل أسلوب الشارع الخاص بك - توصيل بالمغرب">Ignite Your Street Style - Morocco Delivery</p>
+            <a href="#products" class="cta-button" data-en="Light It Up" data-ar="أشعل النار">Light It Up</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title" data-en="About BLAZE" data-ar="حول بليز">About BLAZE</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 data-en="Ignite Your Style" data-ar="أشعل أسلوبك">Ignite Your Style</h2>
+                    <p data-en="Based in Rabat, Morocco, BLAZE specializes in premium oversized attire with completely custom designs. We deliver nationwide across all Moroccan cities, bringing blazing hot street style and premium quality directly to your door." data-ar="مقرنا في الرباط، المغرب، بليز متخصصة في الملابس الواسعة الفاخرة مع تصاميم مخصصة بالكامل. نوصل على المستوى الوطني في جميع المدن المغربية، ونجلب أسلوب الشارع الساخن والجودة الفاخرة مباشرة إلى بابك.">Based in Rabat, Morocco, BLAZE specializes in premium oversized attire with completely custom designs. We deliver nationwide across all Moroccan cities, bringing blazing hot street style and premium quality directly to your door.</p>
+                    <p data-en="Our designs set the streets on fire with bold aesthetics and street culture fusion. BLAZE means passion, energy, and standing out from the crowd. We create pieces that aren't just clothing—they're statements of fire and individuality on premium oversized attire." data-ar="تصاميمنا تشعل الشوارع بالجماليات الجريئة ومزج ثقافة الشارع. بليز يعني الشغف والطاقة والتميز عن الحشد. نصنع قطعًا ليست مجرد ملابس - بل هي بيانات من النار والفردية على ملابس واسعة فاخرة.">Our designs set the streets on fire with bold aesthetics and street culture fusion. BLAZE means passion, energy, and standing out from the crowd. We create pieces that aren't just clothing—they're statements of fire and individuality on premium oversized attire.</p>
+                </div>
+                <div class="about-image">🎨</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Our Products" data-ar="منتجاتنا">Our Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">⚪</div>
+                    <h3 data-en="White Oversized T-Shirt" data-ar="تيشيرت أبيض واسع">White Oversized T-Shirt</h3>
+                    <p data-en="Premium white oversized tee. Perfect canvas for your custom design. All sizes available." data-ar="تيشيرت أبيض واسع فاخر. لوحة مثالية لتصميمك المخصص. جميع المقاسات متوفرة.">Premium white oversized tee. Perfect canvas for your custom design. All sizes available.</p>
+                    <p class="price">250 MAD</p>
+                    <button class="add-to-cart" onclick="addToCart('White Oversized T-Shirt', 250)" data-en="Add to Cart" data-ar="أضف للسلة">Add to Cart</button>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">⚫</div>
+                    <h3 data-en="Black Oversized T-Shirt" data-ar="تيشيرت أسود واسع">Black Oversized T-Shirt</h3>
+                    <p data-en="Premium black oversized tee. Ideal for custom artwork and bold designs. All sizes available." data-ar="تيشيرت أسود واسع فاخر. مثالي للأعمال الفنية المخصصة والتصاميم الجريئة. جميع المقاسات متوفرة.">Premium black oversized tee. Ideal for custom artwork and bold designs. All sizes available.</p>
+                    <p class="price">250 MAD</p>
+                    <button class="add-to-cart" onclick="addToCart('Black Oversized T-Shirt', 250)" data-en="Add to Cart" data-ar="أضف للسلة">Add to Cart</button>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🎨</div>
+                    <h3 data-en="Custom Design Service" data-ar="خدمة التصميم المخصص">Custom Design Service</h3>
+                    <p data-en="Want something unique? Our artists create personalized designs for your tees. From concept to creation." data-ar="تريد شيئًا فريدًا؟ فنانونا يصنعون تصاميم شخصية لتيشيرتاتك. من الفكرة إلى التنفيذ.">Want something unique? Our artists create personalized designs for your tees. From concept to creation.</p>
+                    <p class="price" data-en="From 300 MAD" data-ar="من 300 درهم">From 300 MAD</p>
+                    <button class="add-to-cart" onclick="addToCart('Custom Design Service', 300)" data-en="Request Design" data-ar="اطلب تصميم">Request Design</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section about">
+        <div class="container">
+            <h2 class="section-title" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3 data-en="Address" data-ar="العنوان">Address</h3>
+                    <p>Calle Moretto 30804<br>Barcelona, Spain</p>
+                <div class="contact-card">
+                    <div class="contact-icon">🚚</div>
+                    <h3 data-en="Delivery" data-ar="التوصيل">Delivery</h3>
+                    <p data-en="Free delivery to all Morocco<br>Rabat • Casablanca • Marrakech<br>Fes • Tangier & all cities" data-ar="توصيل مجاني لجميع أنحاء المغرب<br>الرباط • الدار البيضاء • مراكش<br>فاس • طنجة وجميع المدن">Free delivery to all Morocco<br>Rabat • Casablanca • Marrakech<br>Fes • Tangier & all cities</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3 data-en="Phone" data-ar="الهاتف">Phone</h3>
+                    <p><a href="tel:+34722272754">+34 722 272 754</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3 data-en="Email" data-ar="البريد الإلكتروني">Email</h3>
+                    <p><a href="mailto:Rofhxad@gmail.com">Rofhxad@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3 data-en="Social Media" data-ar="وسائل التواصل">Social Media</h3>
+                    <p>
+                        <a href="https://instagram.com/s.treetcanvas" target="_blank">Instagram</a><br>
+                        <a href="https://tiktok.com/@s.treetcanvas" target="_blank">TikTok</a><br>
+                        <a href="https://wa.me/212722272754" target="_blank">WhatsApp</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart -->
+    <div class="cart">
+        <h3 data-en="Shopping Cart" data-ar="سلة التسوق">Shopping Cart</h3>
+        <div id="cart-items"></div>
+        <div class="cart-total">
+            <strong data-en="Total: 0 MAD" data-ar="المجموع: 0 درهم">Total: 0 MAD</strong>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://instagram.com/s.treetcanvas" target="_blank">Instagram</a>
+                <a href="https://tiktok.com/@s.treetcanvas" target="_blank">TikTok</a>
+                <a href="https://wa.me/212722272754" target="_blank">WhatsApp</a>
+                <a href="mailto:Rofhxad@gmail.com">Email</a>
+            </div>
+            <p data-en="© 2025 BLAZE. Premium Custom Attire - Morocco" data-ar="© 2025 بليز. ملابس مخصصة فاخرة - المغرب">© 2025 BLAZE. Premium Custom Attire - Morocco</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language switching
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            const body = document.body;
+            const html = document.documentElement;
+            const button = document.querySelector('.language-switch');
+            
+            if (currentLang === 'en') {
+                currentLang = 'ar';
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+                body.classList.add('rtl');
+                button.textContent = 'English';
+                updateContent('ar');
+            } else {
+                currentLang = 'en';
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                body.classList.remove('rtl');
+                button.textContent = 'العربية';
+                updateContent('en');
+            }
+        }
+
+        function updateContent(lang) {
+            const elements = document.querySelectorAll('[data-en][data-ar]');
+            elements.forEach(element => {
+                if (lang === 'ar') {
+                    element.textContent = element.getAttribute('data-ar');
+                } else {
+                    element.textContent = element.getAttribute('data-en');
+                }
+            });
+            updateCartText();
+        }
+
+        function updateCartText() {
+            const totalElement = document.querySelector('.cart-total strong');
+            if (currentLang === 'ar') {
+                totalElement.textContent = `المجموع: ${cartTotal} درهم`;
+            } else {
+                totalElement.textContent = `Total: ${cartTotal} MAD`;
+            }
+        }
+
+        // Shopping Cart Functionality
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(productName, price) {
+            cart.push({name: productName, price: price});
+            cartTotal += price;
+            updateCartDisplay();
+            
+            // Show confirmation
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = currentLang === 'ar' ? 'تمت الإضافة!' : 'Added!';
+            button.style.background = '#10b981';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 1500);
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            
+            cart.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `${item.name} - ${item.price} MAD`;
+                cartItems.appendChild(div);
+            });
+            
+            updateCartText();
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
